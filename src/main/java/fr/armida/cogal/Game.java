@@ -47,6 +47,7 @@ public class Game {
 	}
 
 	private MacroCell[][] createCells(MacroCell[][] cells, int level) {
+		System.out.println("Cells of level " + level);
 		int width = width(level);
 		MacroCell[][] res = new MacroCell[width][width];
 		
@@ -71,6 +72,7 @@ public class Game {
 	}
 
 	private MacroCell[][] createLevelOneQuadrants(boolean[][] board) {
+		System.out.println("Cells of level " + 1);
 		int width = width(1);
 		MacroCell[][] cells = new MacroCell[width][width];
 		
@@ -102,7 +104,7 @@ public class Game {
 		MacroCell cached = macroCellsByHash.get(mc.hashCode());
 
 		if (cached == null) {
-			System.out.println("Cache miss for : " + mc.toString());
+			//System.out.println("Cache miss for : " + mc.toString());
 			macroCellsByHash.put(mc.hashCode(), mc);
 			cached = mc;
 		}
