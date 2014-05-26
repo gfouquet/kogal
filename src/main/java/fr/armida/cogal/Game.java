@@ -11,9 +11,9 @@ public class Game {
 
 	public Game() {
 		super();
-		boolean[][] board = randomBoard();
+		//boolean[][] board = ;
 		//printBoard(board);
-		buildMacroCells(board);
+		buildMacroCells(randomBoard());
 	}
 
 	public boolean[][] randomBoard() {
@@ -49,9 +49,11 @@ public class Game {
 	private MacroCell[][] createCells(MacroCell[][] cells, int level) {
 		int width = width(level);
 		MacroCell[][] res = new MacroCell[width][width];
+		
+		int subWidth = width(level -1);
 
-		for (int row = 0; row < width; row = row + 2) {
-			for (int col = 0; col < width; col = col + 2) {
+		for (int row = 0; row < subWidth; row = row + 2) {
+			for (int col = 0; col < subWidth; col = col + 2) {
 				MacroCell cell =
 				 cached(new HighLevelMacroCell(level,
 						cells[row][col], cells[row][col + 1],
@@ -71,9 +73,11 @@ public class Game {
 	private MacroCell[][] createLevelOneQuadrants(boolean[][] board) {
 		int width = width(1);
 		MacroCell[][] cells = new MacroCell[width][width];
+		
+		int boardWidth = width(0);
 
-		for (int row = 0; row < width(0); row = row + 2) {
-			for (int col = 0; col < width(0); col = col + 2) {
+		for (int row = 0; row < boardWidth; row = row + 2) {
+			for (int col = 0; col < boardWidth; col = col + 2) {
 				//System.out.println("Reading (" + row + ',' + col + ')');
 				MacroCell mc = createLevelOneCell(board, row, col);
 				mc = cached(mc);
