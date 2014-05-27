@@ -27,10 +27,10 @@ public class GameTest {
 		LevelOneMacroCell cell = (LevelOneMacroCell) game.createLevelOneCell(board, 0, 0);
 		
 		//then 
-		assertThat(cell.getNw(), Is.is(true));
-		assertThat(cell.getNe(), Is.is(false));
-		assertThat(cell.getSe(), Is.is(true));
-		assertThat(cell.getSw(), Is.is(false));
+		assertThat(cell.getNW(), Is.is(true));
+		assertThat(cell.getNE(), Is.is(false));
+		assertThat(cell.getSE(), Is.is(true));
+		assertThat(cell.getSW(), Is.is(false));
 		
 	}
 }

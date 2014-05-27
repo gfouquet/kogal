@@ -8,12 +8,13 @@ public class Game {
 	private static final int MAX_LEVEL = 15;
 	private static final int BOARD_WIDTH = width(0);
 	private final Map<Integer, MacroCell> macroCellsByHash = new HashMap<>();
+	private MacroCell root;
 
 	public Game() {
 		super();
 		//boolean[][] board = ;
 		//printBoard(board);
-		buildMacroCells(randomBoard());
+		root = buildMacroCells(randomBoard());
 	}
 
 	public boolean[][] randomBoard() {

@@ -1,36 +1,44 @@
 package fr.armida.cogal;
 
+import java.util.Arrays;
+
 public class LevelOneMacroCell implements MacroCell {
 	private static final int LEVEL = 1;
-	
-	private final boolean nw;
-	private final boolean ne;
-	private final boolean se;
-	private final boolean sw;
-	
+
+	public final boolean[] quad = new boolean[4];
+
 	// this is immutable so we can cache the hash
-	private Integer hash;
+	private int hash = Integer.MIN_VALUE;
 	// same for string representation
 	private String stringRep;
 
 	public LevelOneMacroCell(boolean nw, boolean ne, boolean se, boolean sw) {
 		super();
-		this.nw = nw;
-		this.ne = ne;
-		this.se = se;
-		this.sw = sw;
+		quad[0] = nw;
+		quad[1] = ne;
+		quad[2] = se;
+		quad[3] = sw;
+	}
+
+	public int getLevel() {
+		return LEVEL;
+	}
+
+	public String toString() {
+		if (stringRep == null) {
+			stringRep = "|" + columnRep(quad[0], quad[3]) + columnRep(quad[1], quad[2])
+					+ "|";
+		}
+
+		return stringRep;
 	}
 
 	@Override
 	public int hashCode() {
-		if (hash == null) {
+		if (hash == Integer.MAX_VALUE) {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + (getNe() ? 1231 : 1237);
-			result = prime * result + (getNw() ? 1231 : 1237);
-			result = prime * result + (getSe() ? 1231 : 1237);
-			result = prime * result + (getSw() ? 1231 : 1237);
-
+			result = prime * result + Arrays.hashCode(quad);
 			hash = result;
 		}
 		return hash;
@@ -45,31 +53,11 @@ public class LevelOneMacroCell implements MacroCell {
 		if (getClass() != obj.getClass())
 			return false;
 		LevelOneMacroCell other = (LevelOneMacroCell) obj;
-		if (getLevel() != other.getLevel())
-			return false;
-		if (getNe() != other.getNe())
-			return false;
-		if (getNw() != other.getNw())
-			return false;
-		if (getSe() != other.getSe())
-			return false;
-		if (getSw() != other.getSw())
+		if (!Arrays.equals(quad, other.quad))
 			return false;
 		return true;
 	}
 
-	public int getLevel() {
-		return LEVEL;
-	}
-
-	public String toString() {
-		if (stringRep == null) {
-			stringRep = "|" + columnRep(getNw(), getSw()) + columnRep(getNe(), getSe()) + "|";
-		}
-		
-		return stringRep;
-	}
-	
 	private char columnRep(boolean top, boolean bottom) {
 		if (top && bottom) {
 			return '8';
@@ -83,19 +71,19 @@ public class LevelOneMacroCell implements MacroCell {
 		return ' ';
 	}
 
-	public boolean getNw() {
-		return nw;
+	public boolean getNW() {
+		return quad[0];
 	}
 
-	public boolean getNe() {
-		return ne;
+	public boolean getNE() {
+		return quad[1];
 	}
 
-	public boolean getSe() {
-		return se;
+	public boolean getSE() {
+		return quad[2];
 	}
 
-	public boolean getSw() {
-		return sw;
+	public boolean getSW() {
+		return quad[3];
 	}
 }

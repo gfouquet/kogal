@@ -6,6 +6,8 @@ public class HighLevelMacroCell implements MacroCell {
 	private final MacroCell ne;
 	private final MacroCell se;
 	private final MacroCell sw;
+	
+	private MacroCell result;
 
 	public HighLevelMacroCell(int level, MacroCell nw, MacroCell ne, MacroCell se, MacroCell sw) {
 		super();
@@ -42,7 +44,7 @@ public class HighLevelMacroCell implements MacroCell {
 		if (getClass() != obj.getClass())
 			return false;
 		HighLevelMacroCell other = (HighLevelMacroCell) obj;
-		if (getLevel() != other.getLevel())
+		if (level != other.level)
 			return false;
 		if (ne == null) {
 			if (other.ne != null)
